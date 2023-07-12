@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 
 
@@ -28,7 +29,7 @@ class WorldTime {
       now = now.add(Duration(hours: int.parse(utc_offSet)));
       
       // set the variable
-      time = now.toString();
+      time = DateFormat.jm().format(now);
       print('now is $now and time is $time'); 
     
   } catch (e) {
