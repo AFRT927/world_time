@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
@@ -20,11 +22,30 @@ void getData() async {
 
 }
 
+void getTime() async {
+  Response res = await get(Uri.parse('http://worldtimeapi.org/api/timezone/Europe/London'));
+  Map data =jsonDecode(res.body);
+  //print('response is $data');
+
+  //get properties from data  
+  String dateTime = data['datetime'];
+  int dst_offSet = data['dst_offset'];
+  String utc_offSet = data['utc_offset'].toString().substring(1,3);
+  print('utc_offSet is $utc_offSet');
+  //create datetime object
+  DateTime now = DateTime.parse(dateTime);
+  print('now before: $now');
+  now = now.add(Duration(hours: int.parse(utc_offSet)));
+  print('now after: $now');
+  
+}
+
 @override
   void initState() {
     // TODO: implement initState
     super.initState();   
-    getData();    
+    //getData();    
+    getTime();
   }
 
   @override
