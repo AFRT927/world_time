@@ -15,17 +15,18 @@ class _LoadingState extends State<Loading> {
 
 void setUpWorldTime() async {
  
-    WorldTime wtExample = WorldTime(location: 'Berlin', flag: 'Berlin.jpeg', url: 'Europe/Berlin'); 
-    await wtExample.getTime();
-    print('${wtExample.location} time is: ${wtExample.time}');  
+    WorldTime worldTimeInstance = WorldTime(location: 'Berlin', flag: 'Berlin.jpeg', url: 'Europe/Berlin'); 
+    await worldTimeInstance.getTime();
+    print('${worldTimeInstance.location} time is: ${worldTimeInstance.time}');  
 
     // navigate to /home and pass data
     Navigator.pushReplacementNamed(context,
                                    '/home',
                                    arguments: {
-                                    'location': wtExample.location,
-                                    'flag': wtExample.flag,
-                                    'time': wtExample.time,
+                                    'location': worldTimeInstance.location,
+                                    'flag': worldTimeInstance.flag,
+                                    'time': worldTimeInstance.time,
+                                    'isDayTime': worldTimeInstance.isDayTime
                                     });
 
 
