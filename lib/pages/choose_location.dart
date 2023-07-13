@@ -12,27 +12,6 @@ class ChooseLocation extends StatefulWidget {
 
 class _ChooseLocationState extends State<ChooseLocation> {
 
-
-
-  void setUpWorldTime(WorldTime wt) async {
- 
-    
-    await wt.getTime();
-    print('${wt.location} time is: ${wt.time}');  
-
-    // navigate to /home and pass data
-    Navigator.pushReplacementNamed(context,
-                                   '/home',
-                                   arguments: {
-                                    'location': wt.location,
-                                    'flag': wt.flag,
-                                    'time': wt.time,
-                                    'isDayTime': wt.isDayTime
-                                    });
-
-
-}
-
   List<WorldTime> locations = [
     WorldTime(url:'Europe/London', location: 'London', flag: 'uk.png'),
     WorldTime(url:'Europe/Berlin', location: 'Germani', flag: 'germany.png'),
@@ -61,8 +40,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
             padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
             child: Card(
               child: ListTile(
-                onTap: () {
-                  //setUpWorldTime(locations[i]);
+                onTap: () {                  
                   Navigator.pushReplacementNamed(context, '/loading', arguments:{'city': locations[i]});
                 },
                 title: Text(locations[i].location),
