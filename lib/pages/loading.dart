@@ -13,20 +13,20 @@ class _LoadingState extends State<Loading> {
 
 
 
-void setUpWorldTime() async {
+void setUpWorldTime(WorldTime wt) async {
  
-    WorldTime worldTimeInstance = WorldTime(location: 'Berlin', flag: 'Berlin.jpeg', url: 'Europe/Berlin'); 
-    await worldTimeInstance.getTime();
-    print('${worldTimeInstance.location} time is: ${worldTimeInstance.time}');  
+    //WorldTime wt = WorldTime(location: 'Berlin', flag: 'Berlin.jpeg', url: 'Europe/Berlin'); 
+    await wt.getTime();
+    print('${wt.location} time is: ${wt.time}');  
 
     // navigate to /home and pass data
     Navigator.pushReplacementNamed(context,
                                    '/home',
                                    arguments: {
-                                    'location': worldTimeInstance.location,
-                                    'flag': worldTimeInstance.flag,
-                                    'time': worldTimeInstance.time,
-                                    'isDayTime': worldTimeInstance.isDayTime
+                                    'location': wt.location,
+                                    'flag': wt.flag,
+                                    'time': wt.time,
+                                    'isDayTime': wt.isDayTime
                                     });
 
 
@@ -37,7 +37,9 @@ void setUpWorldTime() async {
     // TODO: implement initState
     super.initState();
     
-    setUpWorldTime();
+    Map data = ModalRoute.of(context)?.settings.arguments as Map;
+
+    setUpWorldTime(data['city']);
 
   }
 
